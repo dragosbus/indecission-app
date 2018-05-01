@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const lists = [];
+
 class App extends Component {
   render() {
     return (
@@ -26,41 +28,55 @@ class Main extends Component {
   render() {
     return (
       <main>
-        <Counter/>
+        <Form />
+        <List/>
       </main>
     );
   }
 }
 
-class Counter extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      val: ''
     };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
-  increment() {
+  submitForm(e) {
+    e.preventDefault();
+    let val = e.target.elements.option.value;
+    lists.push(val);
     this.setState({
-      counter: this.state.counter + 1
-    });
-  }
-
-  decrement() {
-    this.setState({
-      counter: this.state.counter <=0 ? 0 : this.state.counter - 1
+      val: val
     });
   }
 
   render() {
     return (
-      <div>
-        <h1>{this.state.counter}</h1>
-        <button onClick={this.increment}>+1</button>
-        <button onClick={this.decrement}>-1</button>
-      </div>
+      <form onSubmit={this.submitForm}>
+        <input type="text" name="option" />
+        <input type="submit" value="Add Option"/>
+      </form>
+    );
+  }
+}
+
+class List extends Component {
+  render() {
+    return (
+      <ul>
+        {lists.map(l => <ElementList value={l}/>)}
+      </ul>
+    );
+  }
+}
+
+class ElementList extends Component {
+  render() {
+    return (
+      <li>{this.props.value}</li>
     );
   }
 }
