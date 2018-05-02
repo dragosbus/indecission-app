@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const lists = [];
-
 class App extends Component {
   render() {
     return (
@@ -29,7 +27,6 @@ class Main extends Component {
     return (
       <main>
         <Form />
-        <List/>
       </main>
     );
   }
@@ -39,26 +36,40 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      val: ''
+      items: []
     };
     this.submitForm = this.submitForm.bind(this);
   }
 
   submitForm(e) {
     e.preventDefault();
-    let val = e.target.elements.option.value;
-    lists.push(val);
-    this.setState({
-      val: val
-    });
+    
+    if (this._inputElement.value) {
+      var newItem = {
+        text: this._inputElement.value,
+        key: Date.now()
+      };
+
+      this.setState((prevState) => {
+        return {
+          items: prevState.items.concat(newItem)
+        };
+      });
+      this._inputElement.value = '';
+    }
+
+    console.log(this.state.items);
   }
 
   render() {
     return (
-      <form onSubmit={this.submitForm}>
-        <input type="text" name="option" />
-        <input type="submit" value="Add Option"/>
-      </form>
+      <div className="todo">
+        <form onSubmit={this.submitForm}>
+          <input type="text" ref={(a) => this._inputElement = a} />
+          <input type="submit" value="Add Option" />
+        </form>
+        <List tasks={this.state.items}/>
+      </div>
     );
   }
 }
@@ -66,17 +77,9 @@ class Form extends Component {
 class List extends Component {
   render() {
     return (
-      <ul>
-        {lists.map(l => <ElementList value={l}/>)}
+      <ul className="tasks">
+        {this.props.tasks.map(task => <li key={task.key}>{task.text}</li>)}
       </ul>
-    );
-  }
-}
-
-class ElementList extends Component {
-  render() {
-    return (
-      <li>{this.props.value}</li>
     );
   }
 }
