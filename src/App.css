@@ -44,9 +44,39 @@ input[type="submit"]:hover {
     background: rgb(53, 163, 80);
 }
 
+.tasks {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.tasks > li {
+    width: 85%;
+    margin: 1.5rem auto;
+    background: rgba(23, 67, 133, 0.596);
+    text-align: center;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    transition: background 0.55s ease-in;
+    cursor: pointer;
+}
+
+.tasks > li:hover {
+    background: rgba(150, 33, 72, 0.616);
+}
+
 @media (min-width: 960px) {
     input[type="text"],
     input[type="submit"] {
         width: 50%;
+    }
+
+    .tasks > li {
+        width: 30%;
     }
 }
