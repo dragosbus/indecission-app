@@ -7,3 +7,46 @@
     color: rgb(51, 194, 82);
     text-align: center;
 }
+
+form {
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 75%;
+    height: 40px;
+    margin: 10px auto;
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 5px 5px 0 0;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+input[type="submit"] {
+    height: 40px;
+    display: block;
+    border: none;
+    width: 75%;
+    margin: -10px auto 0;
+    border-radius: 0 0 5px 5px;
+    background: rgb(51, 194, 82);
+    color: #fff;
+    font-size: 1.55rem;
+    transition: background 0.55s ease-in;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: rgb(53, 163, 80);
+}
+
+@media (min-width: 960px) {
+    input[type="text"],
+    input[type="submit"] {
+        width: 50%;
+    }
+}
