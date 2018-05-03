@@ -47,7 +47,7 @@ class Form extends Component {
     if (this._inputElement.value) {
       var newItem = {
         text: this._inputElement.value,
-        key: Date.now()
+        date: new Date().toDateString()
       };
 
       this.setState((prevState) => {
@@ -73,10 +73,11 @@ class Form extends Component {
 }
 
 class List extends Component {
+
   render() {
     return (
       <ul className="tasks">
-        {this.props.tasks.map((task, i) => <ElementList key={i} text={task.text} date={task.key}/>)}
+        {this.props.tasks.map((task, i) => <ElementList removeTask={this.removeTask} key={i} text={task.text} date={task.date}/>)}
       </ul>
     );
   }
@@ -85,7 +86,7 @@ class List extends Component {
 class ElementList extends Component {
   render() {
     return (
-      <li>
+      <li onClick={this.props.removeTask}>
         <p className="task-name">{this.props.text}</p>
         <p className="task-date">{this.props.date}</p>
       </li>

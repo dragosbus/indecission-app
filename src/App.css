@@ -56,18 +56,27 @@ input[type="submit"]:hover {
 .tasks > li {
     width: 85%;
     margin: 1.5rem auto;
-    background: rgba(23, 67, 133, 0.596);
+    background: #fff;
     text-align: center;
-    color: #fff;
-    padding: 1rem;
+    color: rgba(0,0,0,0.85);
     font-size: 1.6rem;
-    border-radius: 1rem;
-    transition: background 0.55s ease-in;
+    border-radius: 0.5rem;
     cursor: pointer;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.3);
 }
 
-.tasks > li:hover {
+.task-name {
+    font-size: 2rem;
+    font-weight: 300;
+    background: rgb(10, 173, 91);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    transition: all 0.55s ease-in;
+}
+
+.tasks > li:hover .task-name {
     background: rgba(150, 33, 72, 0.616);
+    color: #fff;
 }
 
 @media (min-width: 960px) {
