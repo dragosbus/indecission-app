@@ -57,8 +57,6 @@ class Form extends Component {
       });
       this._inputElement.value = '';
     }
-
-    console.log(this.state.items);
   }
 
   render() {
@@ -78,8 +76,19 @@ class List extends Component {
   render() {
     return (
       <ul className="tasks">
-        {this.props.tasks.map(task => <li key={task.key}>{task.text}</li>)}
+        {this.props.tasks.map((task, i) => <ElementList key={i} text={task.text} date={task.key}/>)}
       </ul>
+    );
+  }
+}
+
+class ElementList extends Component {
+  render() {
+    return (
+      <li>
+        <p className="task-name">{this.props.text}</p>
+        <p className="task-date">{this.props.date}</p>
+      </li>
     );
   }
 }
