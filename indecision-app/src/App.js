@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Header } from './components/Header';
 import { Form } from './components/Form';
 import { Tasks } from './components/Tasks';
+import {OptionModal} from './components/OptionModal';
 import './App.css';
 
 class App extends Component {
@@ -9,11 +10,13 @@ class App extends Component {
     super(props);
     this.state = {
       id: 1,
-      tasks: []
+      tasks: [],
+      selectedOption: undefined
     };
     this.addTask = this.addTask.bind(this);
     this.pickOption = this.pickOption.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentWillMount() {
@@ -58,7 +61,9 @@ class App extends Component {
       randomItem = this.state.tasks[randomIndex].name;
     }
 
-    alert(randomItem);
+    this.setState({
+      selectedOption: randomItem
+    });
   }
 
   deleteTask(index) {
@@ -76,12 +81,19 @@ class App extends Component {
     );
   }
 
+  hideModal() {
+    this.setState({
+      selectedOption: undefined
+    });
+  }
+
   render() {
     return (
       <div className="app">
         <Header pickOption={this.pickOption} />
         <Form addTask={this.addTask} />
         <Tasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
+        <OptionModal selectedOption={this.state.selectedOption} hide={this.hideModal}/>
       </div>
     );
   }
