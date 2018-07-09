@@ -1,7 +1,18 @@
-import {
-    Person
-} from './utils';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import {Header} from './components/Header';
 
 
-let d = new Person('dragos');
-console.log(d.sayHi())
+class App extends Component {
+    render() {
+        return(
+            <Header/>
+        );
+    }
+}
+
+
+ReactDOM.render(
+    <App/>,
+    document.getElementById('app')
+)
