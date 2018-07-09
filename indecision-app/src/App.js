@@ -12,6 +12,7 @@ class App extends Component {
       tasks: []
     };
     this.addTask = this.addTask.bind(this);
+    this.pickOption = this.pickOption.bind(this);
   }
 
   addTask(name) {
@@ -28,10 +29,23 @@ class App extends Component {
     });
   }
 
+  pickOption() {
+    let randomIndex = Math.floor(Math.random() * (this.state.tasks.length - 1));
+    let randomItem;
+
+    if(!this.state.tasks[randomIndex]) {
+      randomItem = "The list is empty";
+    } else {
+      randomItem = this.state.tasks[randomIndex].name
+    }
+
+    alert(randomItem);
+  }
+
   render() {
     return (
       <div className="app">
-        <Header />
+        <Header pickOption={this.pickOption}/>
         <Form addTask={this.addTask} />
         <Tasks tasks={this.state.tasks} />
       </div>

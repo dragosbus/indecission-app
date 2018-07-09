@@ -79,6 +79,16 @@ input[type="submit"]:hover {
     color: #fff;
 }
 
+.pick {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.6rem 2rem;
+    border: 2px solid rgba(14, 17, 41, 0.397);
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+}
+
 @media (min-width: 960px) {
     input[type="text"],
     input[type="submit"] {
