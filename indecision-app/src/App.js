@@ -10,22 +10,21 @@ class App extends Component {
     this.state = {
       id: 1,
       tasks: []
-    }
+    };
     this.addTask = this.addTask.bind(this);
   }
-  
-  addTask(e) {
-    e.preventDefault();
+
+  addTask(name) {
     let newTask = {
       id: this.state.id,
-      name: e.target.elements[0].value
+      name: name
     };
 
     this.setState(prevState => {
       return {
         id: this.state.id + 1,
         tasks: prevState.tasks.concat(newTask)
-      }
+      };
     });
   }
 
@@ -33,10 +32,10 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <Form addTask={this.addTask}/>
-        <Tasks tasks={this.state.tasks}/>
+        <Form addTask={this.addTask} />
+        <Tasks tasks={this.state.tasks} />
       </div>
-    )
+    );
   }
 }
 

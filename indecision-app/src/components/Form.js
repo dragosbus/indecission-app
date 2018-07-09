@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 
+export class Form extends Component {
+  addTask(e) {
+    e.preventDefault();
+    this.props.addTask(this._valueTask.value);
+  }
 
-export const Form = props => {
+  render() {
     return (
-        <form onSubmit={props.addTask}>
-            <input type="text" />
-            <input type="submit" value="Add"/>
-        </form>
+      <form onSubmit={this.addTask.bind(this)}>
+        <input ref={inp => (this._valueTask = inp)} type="text" />
+        <input type="submit" value="Add" />
+      </form>
     );
-};
+  }
+}
