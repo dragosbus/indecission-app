@@ -16,6 +16,24 @@ class App extends Component {
     this.deleteTask = this.deleteTask.bind(this);
   }
 
+  componentWillMount() {
+    this.setState({
+      tasks: JSON.parse(localStorage.tasks)
+    });
+  }
+
+  componentDidMount() {
+    if(!localStorage.tasks) {
+      localStorage.tasks = JSON.stringify([]);
+    } else {
+      localStorage.tasks = JSON.stringify(this.state.tasks);
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.tasks = JSON.stringify(this.state.tasks);
+  }
+
   addTask(name) {
     let newTask = {
       id: this.state.id,
@@ -48,11 +66,14 @@ class App extends Component {
     this.state.tasks.forEach((task, i) => {
       task.id = i + 1;
     });
-    this.setState(prevState => {
-      return {
-        tasks: prevState.tasks.filter(task => task.id !== index + 1)
-      };
-    },()=>console.log(this.state.tasks));
+    this.setState(
+      prevState => {
+        return {
+          tasks: prevState.tasks.filter(task => task.id !== index + 1)
+        };
+      },
+      () => console.log(this.state.tasks)
+    );
   }
 
   render() {
