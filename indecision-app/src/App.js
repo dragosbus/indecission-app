@@ -13,6 +13,7 @@ class App extends Component {
     };
     this.addTask = this.addTask.bind(this);
     this.pickOption = this.pickOption.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   addTask(name) {
@@ -33,21 +34,33 @@ class App extends Component {
     let randomIndex = Math.floor(Math.random() * (this.state.tasks.length - 1));
     let randomItem;
 
-    if(!this.state.tasks[randomIndex]) {
-      randomItem = "The list is empty";
+    if (!this.state.tasks[randomIndex]) {
+      randomItem = 'The list is empty';
     } else {
-      randomItem = this.state.tasks[randomIndex].name
+      randomItem = this.state.tasks[randomIndex].name;
     }
 
     alert(randomItem);
   }
 
+  deleteTask(index) {
+    //reset id of the tasks
+    this.state.tasks.forEach((task, i) => {
+      task.id = i + 1;
+    });
+    this.setState(prevState => {
+      return {
+        tasks: prevState.tasks.filter(task => task.id !== index + 1)
+      };
+    },()=>console.log(this.state.tasks));
+  }
+
   render() {
     return (
       <div className="app">
-        <Header pickOption={this.pickOption}/>
+        <Header pickOption={this.pickOption} />
         <Form addTask={this.addTask} />
-        <Tasks tasks={this.state.tasks} />
+        <Tasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
       </div>
     );
   }
