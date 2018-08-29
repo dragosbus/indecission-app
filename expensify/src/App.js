@@ -5,7 +5,7 @@ import './styles/css/index.css';
 
 import { Header } from './components/Header';
 import  AddExpensePage  from './components/AddExpensePage';
-import { EditExpensePage } from './components/EditExpensePage';
+import  EditExpensePage  from './components/EditExpensePage';
 import { ExpenseDashboardPage } from './components/ExpenseDashboardPage';
 import { HelpPage } from './components/HelpPage';
 import { NotFound } from './components/NotFound';
