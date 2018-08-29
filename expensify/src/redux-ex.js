@@ -2,7 +2,6 @@ import {
     createStore,
     combineReducers
 } from 'redux';
-import uuid from 'uuid';
 
 const demoState = {
     expenses: [{
@@ -40,38 +39,7 @@ const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate}) =>{
     });
 };
 
-//ADD_EXPENSE
-const addExpense = ({
-    description = '',
-    note = '',
-    amount = 0,
-    createdAt = 0
-} = {}) => {
-    return {
-        type: 'ADD_EXPENSE',
-        expense: {
-            id: uuid(),
-            description,
-            none,
-            amount,
-            createdAt
-        }
-    }
-};
-//REMOVE_EXPENSE
-const removeExpense = ({id} = {}) =>{
-    return {
-        type: 'REMOVE_EXPENSE'
-    }
-};
-//EDIT_EXPENSE
-const editExpense = (id, updates) => {
-    return {
-        type: 'EDIT_EXPENSE',
-        id,
-        updates
-    }
-};
+
 //SET_TEXT_FILTER
 const setTextFilter = (text='') => {
     return {
