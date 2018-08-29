@@ -12,7 +12,6 @@ export const addExpense = ({
         expense: {
             id: uuid(),
             description,
-            none,
             amount,
             createdAt
         }
