@@ -10,6 +10,8 @@ import { ExpenseDashboardPage } from './components/ExpenseDashboardPage';
 import { HelpPage } from './components/HelpPage';
 import { NotFound } from './components/NotFound';
 
+import './firebase/firebase';
+
 class App extends Component {
   render() {
     console.log(this.props)
