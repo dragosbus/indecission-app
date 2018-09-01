@@ -44,7 +44,14 @@ export const addExpenseMiddle = (expenseData = {}) => dispatch => {
 }
 
 export const removeExpenseMiddle = id => dispatch => {
-    db.ref(`expenses/${id}`).remove().then(res=>{
+    db.ref(`expenses/${id}`).remove().then(()=>{
         dispatch(removeExpense(id));
     });
+};
+
+export const editExpenseMiddle = (id, updates) => dispatch => {
+    db.ref(`expenses/${id}`).update({
+        ...updates
+    });
+    dispatch(editExpense(id, updates));
 };
