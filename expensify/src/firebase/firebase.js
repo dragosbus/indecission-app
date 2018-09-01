@@ -13,17 +13,4 @@ firebase.initializeApp(config);
 
 const db = firebase.database();
 
-db.ref('expenses').on('value', snapshot=>{
-    const expenses = [];
-    snapshot.forEach(s=>{
-        expenses.push({
-            id: s.key,
-            ...s.val()
-        });
-    });
-    console.log(expenses);
-});
-
-db.ref('expenses').on('child_removed', snapshot=>{
-    console.log(snapshot.key, snapshot.val());
-});
+export {firebase, db as default};

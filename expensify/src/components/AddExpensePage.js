@@ -1,6 +1,7 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import { addExpense } from '../actions/expenses';
+import { addExpenseMiddle } from '../actions/expenses';
 import ExpenseForm from './ExpenseForm';
 
 const AddExpensePage = props => {
@@ -9,12 +10,13 @@ const AddExpensePage = props => {
       <h1>Add Expense</h1>
       <ExpenseForm
         onSubmit={expense => {
-          props.dispatch(addExpense(expense));
+          props.dispatch(addExpenseMiddle(expense));
           props.history.push('/')
         }}
       />
     </div>
   );
 };
+
 
 export default connect()(AddExpensePage);
