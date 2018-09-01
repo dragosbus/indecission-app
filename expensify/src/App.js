@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import './styles/css/index.css';
 
 import { Header } from './components/Header';
-import  AddExpensePage  from './components/AddExpensePage';
-import  EditExpensePage  from './components/EditExpensePage';
+import AddExpensePage from './components/AddExpensePage';
+import EditExpensePage from './components/EditExpensePage';
 import { ExpenseDashboardPage } from './components/ExpenseDashboardPage';
 import { HelpPage } from './components/HelpPage';
 import { NotFound } from './components/NotFound';
@@ -14,7 +14,6 @@ import './firebase/firebase';
 
 class App extends Component {
   render() {
-    console.log(this.props)
     return (
       <div className="App">
         <Router>
@@ -34,13 +33,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  expenses: state.expenses
-});
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect()(App);
