@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './styles/css/index.css';
-
+import {bindActionCreators} from 'redux';
+import {registerUserMiddleware} from '../src/actions/user';
 import { Header } from './components/Header';
 import AddExpensePage from './components/AddExpensePage';
 import EditExpensePage from './components/EditExpensePage';
@@ -16,24 +17,23 @@ import './firebase/firebase';
 import { loginUser } from './actions/user';
 
 class App extends Component {
-  state = {
-    isSignedIn: false
-  };
   render() {
     return (
       <div className="App">
         <Router>
           <div>
-            <Header isSignedIn={this.state.isSignedIn} />
+            <Header isSignedIn={this.props.user.isSignedIn} />
             <Switch>
               <Route
                 exact
                 path="/"
                 render={() => {
-                  return this.state.isSignedIn ? <ExpenseDashboardPage /> : <Login />;
+                  return this.props.user.isSignedIn ? <ExpenseDashboardPage /> : <Login />;
                 }}
               />
-              <Route path="/register" component={Register}/>
+              <Route path="/register" render={props=>{
+                return <Register register={this.props.register} history={props.history}/>
+              }}/>
               <Route exact path="/create" component={AddExpensePage} />
               <Route path="/edit/:id" component={EditExpensePage} />
               <Route exact path="/help" component={HelpPage} />
@@ -46,4 +46,13 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  register: bindActionCreators(registerUserMiddleware, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

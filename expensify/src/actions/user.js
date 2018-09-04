@@ -1,9 +1,12 @@
-export const registerUser = user => ({
-    type: 'REGISTER_USER',
-    user
-});
+import {firebase} from '../firebase/firebase';
 
 export const loginUser = user => ({
     type:'LOGIN_USER',
-    user
+    payload: user
 });
+
+export const registerUserMiddleware = user => dispatch => {
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then(()=>{
+        dispatch(loginUser(user));
+    }).catch(err=>console.log(err));   
+};
