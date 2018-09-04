@@ -6,6 +6,7 @@ import {
 import thunk from 'redux-thunk';
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
+import userReducer from '../reducers/userReducer';
 import db from '../firebase/firebase';
 
 const initialData = {
@@ -25,7 +26,8 @@ db.ref('expenses').once('value', snapshot => {
 const store = createStore(
     combineReducers({
         expenses: expensesReducer,
-        filters: filtersReducer
+        filters: filtersReducer,
+        user: userReducer
     }), initialData, applyMiddleware(thunk)
 );
 
