@@ -1,0 +1,21 @@
+%input {
+    border-radius: 10px;
+    height: 3.5rem;
+    border: 1px solid rgba($color: #000000, $alpha: 0.35);
+    outline: none;
+    transition: border-color 0.4s ease-in;
+
+    &:focus {
+        border-color: rgb(18, 187, 74);
+    }
+}
+
+%btn {
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.616);
+    border-radius: 15px;
+    font-size: 1.6rem;
+    background: none;
+    transition: background 0.4s ease-in;
+    cursor: pointer;
+}

@@ -15,6 +15,24 @@ body {
 a {
   text-decoration: none; }
 
+.login-page div input, .register-page div input {
+  border-radius: 10px;
+  height: 3.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  outline: none;
+  transition: border-color 0.4s ease-in; }
+  .login-page div input:focus, .register-page div input:focus {
+    border-color: #12bb4a; }
+
+.login-page button, .register-page button {
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.616);
+  border-radius: 15px;
+  font-size: 1.6rem;
+  background: none;
+  transition: background 0.4s ease-in;
+  cursor: pointer; }
+
 .main-header {
   background: #fff;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
@@ -36,3 +54,72 @@ a {
   font-weight: 700;
   font-size: 1.65rem;
   color: #1021c0; }
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
+  .login-page div {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; }
+    .login-page div label {
+      display: block;
+      text-align: center;
+      width: 100%;
+      font-size: 1.6rem; }
+    .login-page div input {
+      width: 90%;
+      display: block;
+      margin: 0.5rem auto; }
+      @media (min-width: 768px) {
+        .login-page div input {
+          width: 65%; } }
+  .login-page button:hover {
+    background: #0cc248;
+    color: #fff;
+    border: none; }
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
+  .register-page div {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0.6rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; }
+    @media (min-width: 768px) {
+      .register-page div {
+        width: 50%; } }
+    .register-page div label {
+      display: block;
+      width: 100%;
+      font-size: 1.6rem; }
+    .register-page div input {
+      display: block;
+      width: 90%;
+      margin: 0.5rem auto; }
+      @media (min-width: 768px) {
+        .register-page div input {
+          width: 76%; } }
+  .register-page button {
+    display: block; }
+    .register-page button:hover {
+      background: #0cc248;
+      color: #fff;
+      border: none; }

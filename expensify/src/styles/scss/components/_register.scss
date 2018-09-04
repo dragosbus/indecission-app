@@ -1,0 +1,40 @@
+.register-page {
+    @include flexy(center, center, wrap);
+    @include flexy(center, center, wrap);
+    div {
+        width: 100%;
+        margin: 1rem auto;
+        padding: 0.6rem;
+        text-align: center;
+        @include flexy(center, center, wrap);
+        @include mq('md') {
+            width: 50%;
+        }
+
+        label {
+            display: block;
+            width: 100%;
+            font-size: 1.6rem;
+        }
+
+        input {
+            display: block;
+            width: 90%;
+            margin: 0.5rem auto;
+            @extend %input;
+            @include mq('md') {
+                width: 76%;
+            }
+        }
+    }
+
+    button {
+        @extend %btn;
+        display: block;
+        &:hover {
+            background: rgb(12, 194, 72);
+            color: #fff;
+            border: none;
+        }
+    }
+}
