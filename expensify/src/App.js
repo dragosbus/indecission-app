@@ -10,6 +10,7 @@ import { ExpenseDashboardPage } from './components/ExpenseDashboardPage';
 import { HelpPage } from './components/HelpPage';
 import { NotFound } from './components/NotFound';
 import Login from './components/Login';
+import Register from './components/Register';
 
 import './firebase/firebase';
 import { loginUser } from './actions/user';
@@ -32,6 +33,7 @@ class App extends Component {
                   return this.state.isSignedIn ? <ExpenseDashboardPage /> : <Login />;
                 }}
               />
+              <Route path="/register" component={Register}/>
               <Route exact path="/create" component={AddExpensePage} />
               <Route path="/edit/:id" component={EditExpensePage} />
               <Route exact path="/help" component={HelpPage} />

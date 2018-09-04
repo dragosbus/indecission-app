@@ -16,6 +16,9 @@ export const Header = props => {
       <NavLink to="/help" activeClassName="is-active">
         Help
       </NavLink>
+      <NavLink to="/" activeClassName="is-active">
+        Log Out
+      </NavLink>
     </header>
   ) : (
     <header className="main-header">
