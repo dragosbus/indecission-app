@@ -8,6 +8,15 @@ class Login extends Component {
       user: {}
     };
   }
+
+  onChangeEmail = e => {
+
+  };
+
+  onChangePass = e => {
+    
+  }
+
   render() {
     return (
       <form className="login-page">
