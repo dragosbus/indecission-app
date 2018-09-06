@@ -27,7 +27,7 @@ class App extends Component {
                 exact
                 path="/"
                 render={props => {
-                  return this.props.user.isSignedIn ? <ExpenseDashboardPage /> : <Login history={props.history} login={this.props.login}/>;
+                  return this.props.user.isSignedIn ? <ExpenseDashboardPage displayName={this.props.user.email}/> : <Login history={props.history} login={this.props.login}/>;
                 }}
               />
               <Route path="/register" render={props=>{
