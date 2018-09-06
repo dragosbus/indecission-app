@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import InputDiv from './InputDiv';
-import firebase from '../firebase/firebase';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {registerUserMiddleware} from '../actions/user';
 
 class Register extends Component {
   constructor(props) {
