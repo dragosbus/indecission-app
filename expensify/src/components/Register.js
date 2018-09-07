@@ -10,7 +10,8 @@ class Register extends Component {
       password: '',
       repeatPass: '',
       message: '',
-      isValidRegister: false
+      isValidRegister: false,
+      showMessage: false
     };
   }
 
@@ -51,16 +52,31 @@ class Register extends Component {
           email: this.state.email,
           password: this.state.password
         });
-        this.setState({ message: 'registered succesfully', isValidRegister: true });
-        this.props.history.push('/');
+
+        setTimeout(() => {
+          if (this.props.code) {
+            this.setState({ message: 'Email already used', isValidRegister: false });
+          } else {
+            this.setState({ message: 'Registered succesfully', isValidRegister: true });
+            setTimeout(() => {
+              this.props.history.push('/');
+            }, 500);
+          }
+        }, 1000);
       }
     }
+    this.setState({ showMessage: true });
   };
 
   render() {
     return (
       <form className="register-page" onSubmit={this.register}>
-        <span className={this.state.isValidRegister ? 'flash-error' : 'flash-success'}>{this.state.message}</span>
+        <span
+          style={{ display: this.state.showMessage ? 'block' : 'none' }}
+          className={!this.state.isValidRegister ? 'flash flash-error' : 'flash flash-success'}
+        >
+          {this.state.message}
+        </span>
         <InputDiv
           idHTML="register-name"
           label="Name"

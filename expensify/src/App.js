@@ -37,7 +37,7 @@ class App extends Component {
               <Route
                 path="/register"
                 render={props => {
-                  return <Register register={this.props.register} history={props.history} />;
+                  return <Register register={this.props.register} history={props.history} code={this.props.user.code}/>;
                 }}
               />
               <Route exact path="/create" component={AddExpensePage} />
