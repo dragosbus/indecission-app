@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
 import userReducer from '../reducers/userReducer';
+import userAuth from '../reducers/userAuth';
 import db from '../firebase/firebase';
 
 const initialData = {
@@ -27,7 +28,8 @@ const store = createStore(
     combineReducers({
         expenses: expensesReducer,
         filters: filtersReducer,
-        user: userReducer
+        user: userReducer,
+        userAuth: userAuth
     }), initialData, applyMiddleware(thunk)
 );
 

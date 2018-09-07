@@ -16,7 +16,7 @@ export const Header = props => {
       <NavLink to="/help" activeClassName="is-active">
         Help
       </NavLink>
-      <NavLink to="/" activeClassName="is-active">
+      <NavLink onClick={props.logOut} to="/" activeClassName="is-active">
         Log Out
       </NavLink>
     </header>

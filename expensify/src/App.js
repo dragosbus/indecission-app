@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './styles/css/index.css';
 import { bindActionCreators } from 'redux';
-import { registerUserMiddleware, loggedUserMiddleware } from '../src/actions/user';
+import { registerUserMiddleware, loggedUserMiddleware, getCurrentUserMiddleware } from '../src/actions/user';
 import { Header } from './components/Header';
 import AddExpensePage from './components/AddExpensePage';
 import EditExpensePage from './components/EditExpensePage';
@@ -16,12 +16,16 @@ import Register from './components/Register';
 import './firebase/firebase';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getUser();
+  }
   render() {
+    console.log(this.props);
     return (
       <div className="App">
         <Router>
           <div>
-            <Header isSignedIn={this.props.user.isSignedIn} />
+            <Header isSignedIn={this.props.user.isSignedIn} logOut={this.props.logOut}/>
             <Switch>
               <Route
                 exact
@@ -53,12 +57,14 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  userAuth: state.userAuth
 });
 
 const mapDispatchToProps = dispatch => ({
   register: bindActionCreators(registerUserMiddleware, dispatch),
-  login: bindActionCreators(loggedUserMiddleware, dispatch)
+  login: bindActionCreators(loggedUserMiddleware, dispatch),
+  getUser: bindActionCreators(getCurrentUserMiddleware, dispatch)
 });
 
 export default connect(
