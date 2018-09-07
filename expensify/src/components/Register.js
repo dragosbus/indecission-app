@@ -9,7 +9,8 @@ class Register extends Component {
       email: '',
       password: '',
       repeatPass: '',
-      validRegister: false
+      message: '',
+      isValidRegister: false
     };
   }
 
@@ -39,21 +40,56 @@ class Register extends Component {
 
   register = e => {
     e.preventDefault();
-    this.props.register({
-      email: this.state.email,
-      password: this.state.password
-    });
-    this.props.history.push('/');
+    let { name, email, password, repeatPass } = this.state;
+    if (!name || !email || !password || !repeatPass) {
+      this.setState({ message: 'Must fill all inputs', isValidRegister: false });
+    } else {
+      if (password !== repeatPass) {
+        this.setState({ message: 'The passwords must match', isValidRegister: false });
+      } else {
+        this.props.register({
+          email: this.state.email,
+          password: this.state.password
+        });
+        this.setState({ message: 'registered succesfully', isValidRegister: true });
+        this.props.history.push('/');
+      }
+    }
   };
 
   render() {
     return (
       <form className="register-page" onSubmit={this.register}>
-        <InputDiv idHTML="register-name" label="Name" type="text" value={this.state.name} onChangeInput={this.onChangeName}/>
-        <InputDiv idHTML="register-email" label="Email" type="email" value={this.state.email} onChangeInput={this.onChangeEmail}/>
-        <InputDiv idHTML="register-pass" label="Password" type="password" value={this.state.password} onChangeInput={this.onChangePass}/>
-        <InputDiv idHTML="register-repeat-pass" label="Repeat password" type="password" value={this.state.repeatPass} onChangeInput={this.onChangeRepeatPass}/>
-        <button type="submit" disabled={this.state.validRegister}>Register</button>
+        <span className={this.state.isValidRegister ? 'flash-error' : 'flash-success'}>{this.state.message}</span>
+        <InputDiv
+          idHTML="register-name"
+          label="Name"
+          type="text"
+          value={this.state.name}
+          onChangeInput={this.onChangeName}
+        />
+        <InputDiv
+          idHTML="register-email"
+          label="Email"
+          type="email"
+          value={this.state.email}
+          onChangeInput={this.onChangeEmail}
+        />
+        <InputDiv
+          idHTML="register-pass"
+          label="Password"
+          type="password"
+          value={this.state.password}
+          onChangeInput={this.onChangePass}
+        />
+        <InputDiv
+          idHTML="register-repeat-pass"
+          label="Repeat password"
+          type="password"
+          value={this.state.repeatPass}
+          onChangeInput={this.onChangeRepeatPass}
+        />
+        <button type="submit">Register</button>
       </form>
     );
   }
