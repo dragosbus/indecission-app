@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './styles/css/index.css';
 import { bindActionCreators } from 'redux';
-import { registerUserMiddleware, loggedUserMiddleware, getCurrentUserMiddleware } from '../src/actions/user';
 import { Header } from './components/Header';
 import AddExpensePage from './components/AddExpensePage';
 import EditExpensePage from './components/EditExpensePage';
@@ -16,16 +15,13 @@ import Register from './components/Register';
 import './firebase/firebase';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getUser();
-  }
   render() {
     console.log(this.props);
     return (
       <div className="App">
         <Router>
           <div>
-            <Header isSignedIn={this.props.user.isSignedIn} logOut={this.props.logOut}/>
+            <Header isSignedIn={this.props.user.isSignedIn} logOut={this.props.logOut} />
             <Switch>
               <Route
                 exact
@@ -34,14 +30,14 @@ class App extends Component {
                   return this.props.user.isSignedIn ? (
                     <ExpenseDashboardPage displayName={this.props.user.email} />
                   ) : (
-                    <Login history={props.history} login={this.props.login} />
+                    <Login history={props.history} />
                   );
                 }}
               />
               <Route
                 path="/register"
                 render={props => {
-                  return <Register register={this.props.register} history={props.history} code={this.props.user.code}/>;
+                  return <Register history={props.history} />;
                 }}
               />
               <Route exact path="/create" component={AddExpensePage} />
@@ -61,13 +57,13 @@ const mapStateToProps = state => ({
   userAuth: state.userAuth
 });
 
-const mapDispatchToProps = dispatch => ({
-  register: bindActionCreators(registerUserMiddleware, dispatch),
-  login: bindActionCreators(loggedUserMiddleware, dispatch),
-  getUser: bindActionCreators(getCurrentUserMiddleware, dispatch)
-});
+// const mapDispatchToProps = dispatch => ({
+//   register: bindActionCreators(registerUserMiddleware, dispatch),
+//   login: bindActionCreators(loggedUserMiddleware, dispatch),
+//   getUser: bindActionCreators(getCurrentUserMiddleware, dispatch)
+// });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
+  // mapDispatchToProps
 )(App);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { firebase } from '../firebase/firebase';
 import InputDiv from './InputDiv';
 
 class Register extends Component {
@@ -39,6 +40,18 @@ class Register extends Component {
     });
   };
 
+  registerUser = async () => {
+    let { email, password } = this.state;
+    const firestore = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(err => {
+        this.setState({ message: err.code, isValidRegister: false });
+      });
+
+    return firestore;
+  };
+
   register = e => {
     e.preventDefault();
     let { name, email, password, repeatPass } = this.state;
@@ -48,21 +61,22 @@ class Register extends Component {
       if (password !== repeatPass) {
         this.setState({ message: 'The passwords must match', isValidRegister: false });
       } else {
-        this.props.register({
-          email: this.state.email,
-          password: this.state.password
-        });
-
-        setTimeout(() => {
-          if (this.props.code) {
-            this.setState({ message: 'Email already used', isValidRegister: false });
-          } else {
-            this.setState({ message: 'Registered succesfully', isValidRegister: true });
+        this.registerUser().then(() => {
+          if (this.state.message !== 'auth/email-already-in-use') {
+            this.setState({
+              message: 'Registered successfully',
+              isValidRegister: true
+            });
             setTimeout(() => {
               this.props.history.push('/');
-            }, 500);
+            }, 1000);
+          } else {
+            this.setState({
+              message: 'Email already used',
+              isValidRegister: false
+            });
           }
-        }, 1000);
+        });
       }
     }
     this.setState({ showMessage: true });
