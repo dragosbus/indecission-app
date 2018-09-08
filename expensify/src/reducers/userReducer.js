@@ -6,6 +6,10 @@ const userReducer = (state = {
             return Object.assign({}, {
                 isSignedIn: true
             }, action.payload);
+        case 'LOGIN_USER':
+            return Object.assign({}, {
+                isSignedIn: true
+            }, action.payload);
         case 'ERROR_LOGIN':
             return Object.assign({}, state, action.payload);
         default:

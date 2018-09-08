@@ -29,13 +29,20 @@ class Login extends Component {
       password: this.state.password
     });
     this.props.history.push('/');
-  }
+  };
   render() {
-    let {email, password} = this.state;
+    let { email, password } = this.state;
     return (
       <form className="login-page" onSubmit={this.onLoginSubmit}>
-        <InputDiv type="text" idHTML="login-email" label="Email" value={email} onChangeInput={this.onChangeEmail}/>
-        <InputDiv type="password" idHTML="login-pass" label="Password" value={password} onChangeInput={this.onChangePass}/>
+        <span className="flash flash-error" style={{ display: this.props.errorMsg ? 'block' : 'none' }}>{this.props.message}</span>
+        <InputDiv type="text" idHTML="login-email" label="Email" value={email} onChangeInput={this.onChangeEmail} />
+        <InputDiv
+          type="password"
+          idHTML="login-pass"
+          label="Password"
+          value={password}
+          onChangeInput={this.onChangePass}
+        />
         <button type="submit">Login</button>
       </form>
     );

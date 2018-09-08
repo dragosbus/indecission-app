@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './styles/css/index.css';
 import { bindActionCreators } from 'redux';
-import { userSessionMiddleware } from './actions/user';
+import { userSessionMiddleware, loginUserMiddleware } from './actions/user';
 import { Header } from './components/Header';
 import AddExpensePage from './components/AddExpensePage';
 import EditExpensePage from './components/EditExpensePage';
@@ -31,7 +31,12 @@ class App extends Component {
                   return this.props.user.isSignedIn ? (
                     <ExpenseDashboardPage displayName={this.props.user.email} />
                   ) : (
-                    <Login history={props.history} />
+                    <Login
+                      errorMsg={this.props.user.message}
+                      message={this.props.user.message}
+                      history={props.history}
+                      login={this.props.login}
+                    />
                   );
                 }}
               />
@@ -58,7 +63,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  userSession: bindActionCreators(userSessionMiddleware, dispatch)
+  userSession: bindActionCreators(userSessionMiddleware, dispatch),
+  login: bindActionCreators(loginUserMiddleware, dispatch)
 });
 
 export default connect(

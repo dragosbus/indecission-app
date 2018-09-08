@@ -62,7 +62,18 @@ class Register extends Component {
         this.setState({ message: 'The passwords must match', isValidRegister: false });
       } else {
         this.registerUser().then(() => {
-          if (this.state.message !== 'auth/email-already-in-use') {
+          console.log(this.state.message);
+          if (this.state.message === 'auth/email-already-in-use') {
+            this.setState({
+              message: 'Email already used',
+              isValidRegister: false
+            });
+          } else if (this.state.message === 'auth/weak-password') {
+            this.setState({
+              message: 'Weak password.The password must be 6 characters or more',
+              isValidRegister: false
+            });
+          } else {
             this.setState({
               message: 'Registered successfully',
               isValidRegister: true
@@ -71,11 +82,6 @@ class Register extends Component {
             setTimeout(() => {
               this.props.history.push('/');
             }, 1000);
-          } else {
-            this.setState({
-              message: 'Email already used',
-              isValidRegister: false
-            });
           }
         });
       }
