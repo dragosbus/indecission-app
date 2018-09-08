@@ -18,8 +18,10 @@ export const userSession = user => ({
 });
 
 export const loginUserMiddleware = user => dispatch => {
+    //check for values of the inputs
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(() => {
+            //if the inputs are valid, get the user from firebase
             firebase.auth().onAuthStateChanged(s => {
                 dispatch(loginUser({
                     id: s.uid,

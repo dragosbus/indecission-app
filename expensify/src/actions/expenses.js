@@ -22,7 +22,7 @@ export const editExpense = (id, updates) => {
     }
 };
 
-export const addExpenseMiddle = (expenseData = {}) => dispatch => {
+export const addExpenseMiddle = (expenseData = {}, user) => dispatch => {
     const {
         description = '',
             note = '',
@@ -35,7 +35,7 @@ export const addExpenseMiddle = (expenseData = {}) => dispatch => {
         amount,
         createdAt
     };
-    db.ref('expenses').push(expense).then((ref) => {
+    db.ref(`expenses/${user}`).push(expense).then((ref) => {
         dispatch(addExpense({
             id: ref.key,
             ...expense

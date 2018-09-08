@@ -9,7 +9,7 @@ const AddExpensePage = props => {
       <h1>Add Expense</h1>
       <ExpenseForm
         onSubmit={expense => {
-          props.dispatch(addExpenseMiddle(expense));
+          props.dispatch(addExpenseMiddle(expense, props.user.id));
           props.history.push('/')
         }}
       />
@@ -17,5 +17,9 @@ const AddExpensePage = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  user: state.user
+});
 
-export default connect()(AddExpensePage);
+
+export default connect(mapStateToProps)(AddExpensePage);
