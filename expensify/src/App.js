@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './styles/css/index.css';
 import { bindActionCreators } from 'redux';
+import { userSessionMiddleware } from './actions/user';
 import { Header } from './components/Header';
 import AddExpensePage from './components/AddExpensePage';
 import EditExpensePage from './components/EditExpensePage';
@@ -37,7 +38,7 @@ class App extends Component {
               <Route
                 path="/register"
                 render={props => {
-                  return <Register history={props.history} />;
+                  return <Register history={props.history} userSession={this.props.userSession} />;
                 }}
               />
               <Route exact path="/create" component={AddExpensePage} />
@@ -53,17 +54,14 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
-  userAuth: state.userAuth
+  user: state.user
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   register: bindActionCreators(registerUserMiddleware, dispatch),
-//   login: bindActionCreators(loggedUserMiddleware, dispatch),
-//   getUser: bindActionCreators(getCurrentUserMiddleware, dispatch)
-// });
+const mapDispatchToProps = dispatch => ({
+  userSession: bindActionCreators(userSessionMiddleware, dispatch)
+});
 
 export default connect(
-  mapStateToProps
-  // mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

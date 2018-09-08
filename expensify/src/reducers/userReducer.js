@@ -2,7 +2,7 @@ const userReducer = (state = {
     isSignedIn: false
 }, action) => {
     switch (action.type) {
-        case 'LOGIN_USER':
+        case 'USER_SESSION':
             return Object.assign({}, {
                 isSignedIn: true
             }, action.payload);

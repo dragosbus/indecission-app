@@ -67,6 +67,7 @@ class Register extends Component {
               message: 'Registered successfully',
               isValidRegister: true
             });
+            this.props.userSession();
             setTimeout(() => {
               this.props.history.push('/');
             }, 1000);
