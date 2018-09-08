@@ -20,7 +20,12 @@ export const userSession = user => ({
 export const loginUserMiddleware = user => dispatch => {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(() => {
-            dispatch(loginUser(user));
+            firebase.auth().onAuthStateChanged(s => {
+                dispatch(loginUser({
+                    id: s.uid,
+                    email: s.email
+                }));
+            });
         })
         .catch(function (error) {
             dispatch(errorLogin({
